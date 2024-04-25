@@ -1,0 +1,23 @@
+##### Global rules #####
+include: "rules/common.smk"
+
+##### Target rules #####
+rule all:
+    input:
+        os.path.join(config['outdir'], 'cnv', 'run_metrics.tsv'),
+        collect(os.path.join(config['outdir'], 'cnv', '{sample}', '{sample}_bintest.tsv'), sample=SAMPLES.index),
+        collect(os.path.join(config['outdir'], 'cnv', '{sample}', '{sample}_breaks.tsv'), sample=SAMPLES.index),
+        collect(os.path.join(config['outdir'], 'cnv', '{sample}', '{sample}_genemetrics.tsv'), sample=SAMPLES.index),
+        collect(os.path.join(config['outdir'], 'cnv', '{sample}', '{sample}_scatter.pdf'), sample=SAMPLES.index),
+        collect(os.path.join(config['outdir'], 'cnv', '{sample}', '{sample}_scatter.png'), sample=SAMPLES.index),
+        collect(os.path.join(config['outdir'], 'annotsv', '{sample}.annotated.tsv'), sample=SAMPLES.index),
+##### Modules #####
+
+# Rules for preprocessing
+include: "rules/preprocessing.smk"
+
+# Rules to call copy number variants
+include: "rules/cnv.smk"
+
+# Rules to annotate variants
+include: "rules/annotation.smk"

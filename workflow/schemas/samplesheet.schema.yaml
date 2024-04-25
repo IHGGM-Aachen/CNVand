@@ -1,0 +1,14 @@
+$schema: 'http://json-schema.org/draft-04/schema#'
+items:
+  type: object
+  properties:
+    sample:
+      type: 'string'
+    bam_path:
+      type: 'string'
+    vcf_path:
+      type: 'string'
+  required:
+    - sample
+    - bam_path
+    - vcf_path

@@ -1,0 +1,40 @@
+### Samplesheet
+samples: config/samplesheet.tsv
+
+### Output directory
+outdir: output/
+
+### Reference data
+ref:
+  genome: data/Homo_sapiens_assembly38.fasta # Take care you're using the same reference in your full workflow
+  target_bed: data/target.bed
+  antitarget_bed: data/antitarget.bed
+
+### Toolkit parameter settings
+params:
+  cnvkit:
+    target_coverage:
+      extra: "-q 20"
+    antitarget_coverage:
+      extra: "-q 20"
+    reference:
+      extra: ""
+    call:
+      ploidy: 2
+      extra: "" 
+    bintest:
+      extra: "" 
+    breaks:
+      extra: "" 
+    genemetrics:
+      extra: "" 
+    scatter:
+      y_min: "-2.5"
+      extra: "" 
+    export_vcf:
+      extra: "" 
+    segment:
+      extra: ""
+  annotsv:
+    refGene: "/path/to/Annotations_Human/Genes/GRCh38/refGene.txt.gz" # Needs to be set for annotsv to work
+    extra: ""                                                         # Can be downloaded here (GRCh38): http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/ncbiRefSeq.txt.gz

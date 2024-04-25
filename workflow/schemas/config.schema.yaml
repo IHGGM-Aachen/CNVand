@@ -1,0 +1,89 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+type: object
+properties:
+  samples:
+    type: string
+  outdir:
+    type: string
+  ref:
+    type: object
+    properties:
+      genome:
+        type: string
+      target_bed:
+        type: string
+      antitarget_bed:
+        type: string
+  params:
+    type: object
+    properties:
+      cnvkit:
+        type: object
+        properties:
+          target_coverage:
+            type: object
+            properties:
+              extra:
+                type: string
+          antitarget_coverage:
+            type: object
+            properties:
+              extra:
+                type: string
+          reference:
+            type: object
+            properties:
+              extra:
+                type: string
+          call:
+            type: object
+            properties:
+              ploidy:
+                type: integer
+              extra:
+                type: string
+          bintest:
+            type: object
+            properties:
+              extra:
+                type: string
+          breaks:
+            type: object
+            properties:
+              extra:
+                type: string
+          genemetrics:
+            type: object
+            properties:
+              extra:
+                type: string
+          scatter:
+            type: object
+            properties:
+              y_min:
+                type: string
+              extra:
+                type: string
+          export_vcf:
+            type: object
+            properties:
+              extra:
+                type: string
+          segment:
+            type: object
+            properties:
+              extra:
+                type: string
+      annotsv:
+        type: object
+        properties:
+          refGene:
+            type: string
+          extra:
+            type: string
+required:
+  - samples
+  - outdir
+  - ref
+  - params
