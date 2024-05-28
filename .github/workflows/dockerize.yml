@@ -15,7 +15,7 @@ jobs:
     
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository | toLower }}
+      IMAGE_NAME: ${{ cnvand }}
 
     steps:
     - name: Checkout repository
