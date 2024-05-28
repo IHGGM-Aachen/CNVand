@@ -1,12 +1,8 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   build-and-push:
@@ -20,31 +16,32 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Snakemake and Dependencies
+      run: |
+        pip install snakemake
+        pip install pulp==2.3  # Ensure compatible version of pulp
+
+    - name: Generate Dockerfile
+      run: |
+        snakemake --containerize > Dockerfile
+
     - name: Log in to the Container registry
       uses: docker/login-action@v2
       with:
         registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        username: ${{ secrets.GHCR_USERNAME }}
+        password: ${{ secrets.GHCR_PAT }}
 
     - name: Extract metadata (tags, labels) for Docker
       id: meta
       uses: docker/metadata-action@v4
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
-
-    - name: Install Snakemake
-      run: |
-        pip install snakemake
-
-    - name: Generate Dockerfile
-      run: |
-        snakemake --containerize > Dockerfile
 
     - name: Build and push Docker image
       id: push
