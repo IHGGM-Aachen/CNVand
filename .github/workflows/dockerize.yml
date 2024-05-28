@@ -24,11 +24,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
+        python-version: '3.12'
 
     - name: Install Snakemake and Dependencies
       run: |
-        pip install snakemake==8.0
+        pip install snakemake==8.12.0
         pip install pandas
         pip install pulp==2.3  # Ensure compatible version of pulp
 
