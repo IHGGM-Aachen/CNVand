@@ -8,14 +8,13 @@ on:
     branches:
       - main
 
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: cnvand
+      IMAGE_NAME: carlosclassen/cnvand
 
     steps:
     - name: Checkout repository
