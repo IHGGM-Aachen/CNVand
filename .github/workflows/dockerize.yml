@@ -29,6 +29,7 @@ jobs:
     - name: Install Snakemake and Dependencies
       run: |
         pip install snakemake
+        pip install pandas
         pip install pulp==2.3  # Ensure compatible version of pulp
 
     - name: Generate Dockerfile
