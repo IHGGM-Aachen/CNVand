@@ -1,5 +1,4 @@
 name: Build and Push Docker Image
-
 on:
   push:
     branches:
@@ -7,22 +6,18 @@ on:
   pull_request:
     branches:
       - main
-
 env:
       REGISTRY: ghcr.io
       IMAGE_NAME: carlosclassen/cnvand  # Ensure this is in lowercase
-
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
-
     permissions:
-      contents: read
-      pages: write
-      id-token: write
-      packages: write
-      attestations: write
-
+        contents: read
+        pages: write
+        id-token: write
+        packages: write
+        attestations: write
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -40,14 +35,19 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-    - name: Build and push Docker image
-      id: push
-      uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-      with:
-        context: .
-        push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+    - name: Build Docker image
+      id: build
+      run: |
+        docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
+
+    - name: Push Docker image
+      run: |
+        docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+    - name: Tag Docker image with latest
+      run: |
+        docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
     - name: Generate artifact attestation
       uses: actions/attest-build-provenance@v1
