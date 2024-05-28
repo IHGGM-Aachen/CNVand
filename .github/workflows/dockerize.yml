@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -33,6 +37,12 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+    - name: Download and Extract Annotations
+      run: |
+        mkdir -p data/annotations
+        curl -L https://www.lbgi.fr/~geoffroy/Annotations/Annotations_Human_3.4.2.tar.gz -o data/annotations/Annotations_Human_3.4.2.tar.gz
+        tar -xzvf data/annotations/Annotations_Human_3.4.2.tar.gz -C data/annotations/
+
     - name: Build Docker image
       id: build
       run: |
@@ -43,7 +53,15 @@ jobs:
       run: |
         docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
+    - name: Verify Image Tag
+      run: |
+        docker images ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
     - name: Tag Docker image with latest
       run: |
         docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
         docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+    - name: Verify Latest Tag
+      run: |
+        docker images ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
