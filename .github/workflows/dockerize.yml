@@ -1,35 +1,20 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+  release:
+    types: [published]
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    
+
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: cnvand
+      IMAGE_NAME: ${{ github.repository }} # This will be converted to lowercase
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-
-    - name: Install Snakemake and Dependencies
-      run: |
-        pip install snakemake==8.12.0
-        pip install pandas
 
     - name: Log in to the Container registry
       uses: docker/login-action@v2
@@ -42,7 +27,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        images: ${{ env.REGISTRY }}/{{ env.IMAGE_NAME | toLower }}
 
     - name: Build and push Docker image
       id: push
@@ -53,9 +38,14 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
+    - name: Tag the Docker image with latest
+      run: |
+        docker tag ${{ env.REGISTRY }}/{{ env.IMAGE_NAME | toLower }}:${{ github.sha }} ${{ env.REGISTRY }}/{{ env.IMAGE_NAME | toLower }}:latest
+        docker push ${{ env.REGISTRY }}/{{ env.IMAGE_NAME | toLower }}:latest
+
     - name: Generate artifact attestation
       uses: actions/attest-build-provenance@v1
       with:
-        subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        subject-name: ${{ env.REGISTRY }}/{{ env.IMAGE_NAME | toLower }}
         subject-digest: ${{ steps.push.outputs.digest }}
         push-to-registry: true
