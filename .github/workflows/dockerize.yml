@@ -41,8 +41,15 @@ jobs:
         docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
 
     - name: Push Docker image
+      id: push
       run: |
         docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+      # Capture the digest of the pushed image
+      continue-on-error: true
+      shell: bash
+      env:
+        DIGEST: $(docker inspect --format='{{index .RepoDigests 0}}' ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} | awk -F'@' '{print $2}')
+      run: echo "DIGEST=$DIGEST" >> $GITHUB_ENV
 
     - name: Tag Docker image with latest
       run: |
@@ -53,5 +60,5 @@ jobs:
       uses: actions/attest-build-provenance@v1
       with:
         subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-        subject-digest: ${{ steps.build.outputs.digest }}
+        subject-digest: ${{ env.DIGEST }}
         push-to-registry: true
