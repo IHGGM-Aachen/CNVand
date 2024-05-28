@@ -1,0 +1,54 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install Snakemake
+      run: |
+        pip install snakemake
+
+    - name: Generate Dockerfile
+      run: |
+        snakemake --containerize > Dockerfile
+
+    - name: Build Docker image
+      run: |
+        docker build -t $REGISTRY/${{ github.repository }}:${{ github.sha }} .
+      
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Push Docker image
+      run: |
+        docker push $REGISTRY/${{ github.repository }}:${{ github.sha }}
+
+    - name: Tag the Docker image with latest
+      run: |
+        docker tag $REGISTRY/${{ github.repository }}:${{ github.sha }} $REGISTRY/${{ github.repository }}:latest
+        docker push $REGISTRY/${{ github.repository }}:latest
