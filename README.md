@@ -12,8 +12,10 @@ To configure this pipeline, modify the config under `config/config.yaml` as need
 ## Samplesheet
 Add samples to the pipeline by completing `config/samplesheet.tsv`. Each `sample` should be associated with a `path` to the corresponding BAM and VCF file.
 
-## Pipeline Execution
-CNVand can be only be executed using conda environments for the moment.
+## Pipeline Setup
+CNVand can be only be executed using conda environments for the moment. 
+
+For AnnotSV to work, the annotation files must be downloaded separately and be referenced in the config file under the respective key. For human annotations, this can be done [here](https://www.lbgi.fr/~geoffroy/Annotations/Annotations_Human_3.4.2.tar.gz). In case this link is not working, check the original [AnnotSV](https://github.com/lgmgeo/AnnotSV/tree/master) repository for updates on how to obtain the annotations.
 
 ### Mamba
 For installation and dependency management, Mamba is recommended. Install Snakemake and dependencies using the command `mamba env create -f environment.yml`.
