@@ -2,4 +2,4 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - annotsv
+  - annotsv == 3.4.2 
