@@ -31,10 +31,6 @@ jobs:
         pip install snakemake==8.12.0
         pip install pandas
 
-    - name: Generate Dockerfile
-      run: |
-        snakemake --containerize > Dockerfile
-
     - name: Log in to the Container registry
       uses: docker/login-action@v2
       with:
