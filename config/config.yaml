@@ -36,5 +36,5 @@ params:
     segment:
       extra: ""
   annotsv:
-    annotations: "/home/cclassen/projects/cnvand/data/annotations" # Annotations to be downloaded externally - see README.md for more details
+    annotations: "data/annotations" # Annotations to be downloaded externally - see README.md for more details
     extra: ""
