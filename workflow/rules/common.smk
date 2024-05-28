@@ -2,7 +2,7 @@ import pandas as pd
 from snakemake.utils import validate
 from snakemake.utils import min_version
 
-min_version("7.0.0")
+min_version("8.0.0")
 
 report: "../report/workflow.rst"
 
