@@ -30,7 +30,6 @@ jobs:
       run: |
         pip install snakemake==8.12.0
         pip install pandas
-        pip install pulp==2.3  # Ensure compatible version of pulp
 
     - name: Generate Dockerfile
       run: |
