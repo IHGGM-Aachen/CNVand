@@ -1,3 +1,7 @@
+##### Global conda enviroment #####
+conda:
+    "envs/global.yaml"
+
 ##### Global rules #####
 include: "rules/common.smk"
 
