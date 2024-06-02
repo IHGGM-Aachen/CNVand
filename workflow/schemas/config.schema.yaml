@@ -1,5 +1,4 @@
 $schema: "http://json-schema.org/draft-04/schema#"
-
 type: object
 properties:
   samples:
@@ -15,6 +14,10 @@ properties:
         type: string
       antitarget_bed:
         type: string
+    required:
+      - genome
+      - target_bed
+      - antitarget_bed
   params:
     type: object
     properties:
@@ -78,10 +81,12 @@ properties:
       annotsv:
         type: object
         properties:
-          refGene:
+          annotations:
             type: string
           extra:
             type: string
+        required:
+          - annotations
 required:
   - samples
   - outdir
