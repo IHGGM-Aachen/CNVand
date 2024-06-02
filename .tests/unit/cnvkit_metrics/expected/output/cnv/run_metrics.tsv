@@ -1,0 +1,3 @@
+sample	segments	stdev	mad	iqr	bivar
+output/cnv/M24352/M24352.cnr	-	0.292117	0.267031	0.357747	0.284905
+output/cnv/M24352/M24352_call.cns	-	0.233167	0.296874	0.389518	0.245773
