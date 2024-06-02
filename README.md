@@ -1,7 +1,7 @@
 # CNVand
-[![Snakemake](https://img.shields.io/badge/snakemake-≥7.16.0-brightgreen.svg?style=flat-square)](https://snakemake.bitbucket.io)
-[![Conda](https://img.shields.io/badge/conda-≥23.1.0-brightgreen.svg?style=flat-square)](https://anaconda.org/conda-forge/mamba)
-![Docker](https://img.shields.io/badge/docker-≥20.10.7-brightgreen.svg?style=flat-square)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥8.0.0-brightgreen.svg?style=flat-square)](https://snakemake.bitbucket.io)
+[![Conda](https://img.shields.io/badge/conda-≥23.11.0-brightgreen.svg?style=flat-square)](https://anaconda.org/conda-forge/mamba)
+![Docker](https://img.shields.io/badge/docker-≥26.1.4-brightgreen.svg?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 
 CNVand is a Snakemake pipeline for CNV analysis. Given a set of BAM and VCF files it utilizes the tools `cnvkit` and `AnnotSV` to analyze and annotate them
