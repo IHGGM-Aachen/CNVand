@@ -7,7 +7,7 @@ rule cnvkit_target_coverage:
         os.path.join(config['outdir'], 'cnv', '{sample}', '{sample}.targetcoverage.cnn')
     params:
         extra=config['params']['cnvkit']['target_coverage']['extra']
-    threads: 24
+    threads: 8
     log:
         os.path.join(config['outdir'], 'logs', 'cnvkit_target_coverage', '{sample}.log')
     conda:
@@ -24,7 +24,7 @@ rule cnvkit_antitarget_coverage:
         os.path.join(config['outdir'], 'cnv', '{sample}', '{sample}.antitargetcoverage.cnn')
     params:
         extra=config['params']['cnvkit']['antitarget_coverage']['extra']
-    threads: 24
+    threads: 8
     log:
         os.path.join(config['outdir'], 'logs', 'cnvkit_antitarget_coverage', '{sample}.log')
     conda:

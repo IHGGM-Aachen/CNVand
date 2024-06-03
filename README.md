@@ -3,8 +3,13 @@
 [![Conda](https://img.shields.io/badge/conda-≥23.11.0-brightgreen.svg?style=flat-square)](https://anaconda.org/conda-forge/mamba)
 ![Docker](https://img.shields.io/badge/docker-≥26.1.4-brightgreen.svg?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) 
 
-CNVand is a Snakemake pipeline for CNV analysis. Given a set of BAM and VCF files it utilizes the tools `cnvkit` and `AnnotSV` to analyze and annotate them
+CNVand is a Snakemake pipeline for CNV analysis. Given a set of BAM and VCF files, it utilizes the tools `cnvkit` and `AnnotSV` to analyze and annotate them.
+
+<div align="center">
+  <img src="images/rulegraph.svg" alt="Rule Graph">
+</div>
 
 ## General Settings
 To configure this pipeline, modify the config under `config/config.yaml` as needed. Detailed explanations for each setting are provided within the file.
@@ -13,22 +18,75 @@ To configure this pipeline, modify the config under `config/config.yaml` as need
 Add samples to the pipeline by completing `config/samplesheet.tsv`. Each `sample` should be associated with a `path` to the corresponding BAM and VCF file.
 
 ## Pipeline Setup
-CNVand can be be executed using conda environments or a pre-built docker container.
+CNVand can be executed using conda environments or a pre-built docker container.
 
 For AnnotSV to work, the annotation files must be downloaded separately and be referenced in the config file under the respective key. For human annotations, this can be done [here](https://www.lbgi.fr/~geoffroy/Annotations/Annotations_Human_3.4.2.tar.gz). In case this link is not working, check the original [AnnotSV](https://github.com/lgmgeo/AnnotSV/tree/master) repository for updates on how to obtain the annotations.
 
 When using CNVand within the pre-built docker container, it is not needed to download the annotations externally - they come bundled with the container and are available under `data/annotations/`.
 
 ### Mamba
-For installation and dependency management, Mamba is recommended over conda. Install Snakemake and dependencies using the command `mamba env create -f environment.yml`.
+For installation and dependency management, Mamba is recommended over conda. Install Snakemake and dependencies using the command:
 
-Execute the pipeline with `snakemake --cores all --use-conda`.
+```bash
+mamba env create -f environment.yml
+```
 
-Generate a comprehensive execution report by running `snakemake --report report.zip`.
+Execute the pipeline with:
 
-### Docker 
+```bash
+snakemake --cores all --use-conda
+```
 
-CNVand can also be used inside a docker container. To do so, first pull the docker image with
-```docker pull ghcr.io/carlosclassen/cnvand:latest```.
+Generate a comprehensive execution report by running:
+
+```bash
+snakemake --report report.zip
+```
+
+### Docker
+
+CNVand can also be used inside a docker container. To do so, first pull the docker image with:
+
+```bash
+docker pull ghcr.io/carlosclassen/cnvand:latest
+```
 
 Then run the container with the bind mounts needed in your setup and execute the pipeline inside.
+
+```bash
+docker run --rm -v /path/to/your/data:/data ghcr.io/carlosclassen/cnvand:latest snakemake --cores all --use-conda
+```
+
+## Contributing
+
+We welcome contributions to improve CNVand. Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started.
+
+## Code of Conduct
+
+We are committed to fostering an open and welcoming environment. Please see our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for our community guidelines.
+
+## Documentation
+
+Detailed documentation for the workflow can be found in `workflow/documentation.md`.
+
+## Testing
+
+To ensure the pipeline runs correctly, we have set up both unit and integration tests. Unit tests are generated from successful workflow runs, and integration tests are configured to run the entire workflow with test data.
+
+### Integration Tests
+
+The integration test can be run using the data and config provided. Remember to download the correct reference/annotations (GRCh38) in case of the bundled NIST data) by yourself and adjust your local paths as necessary (e.g. workflow/resources and workflow/data for the reference and annotations respectively)!
+
+### Unit Tests
+
+Run the unit tests with:
+
+```bash
+pytest -v .tests/unit
+```
+
+This will check for the correct CNVand output per rule.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.

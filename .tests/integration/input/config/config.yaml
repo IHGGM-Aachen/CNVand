@@ -1,0 +1,40 @@
+### Samplesheet
+samples: config/samplesheet.tsv
+
+### Output directory
+outdir: output/
+
+### Reference data
+ref:
+  genome: workflow/resources/Homo_sapiens_assembly38.fasta # Take care you're using the same reference in your full workflow
+  target_bed: .tests/integration/input/target.bed
+  antitarget_bed: .tests/integration/input/antitarget.bed
+
+### Toolkit parameter settings
+params:
+  cnvkit:
+    target_coverage:
+      extra: "-q 20"
+    antitarget_coverage:
+      extra: "-q 20"
+    reference:
+      extra: ""
+    call:
+      ploidy: 2
+      extra: "" 
+    bintest:
+      extra: "" 
+    breaks:
+      extra: "" 
+    genemetrics:
+      extra: "" 
+    scatter:
+      y_min: "-2.5"
+      extra: "" 
+    export_vcf:
+      extra: "" 
+    segment:
+      extra: ""
+  annotsv:
+    annotations: "workflow/data/annotations/" # Annotations to be downloaded externally - see README.md for more details
+    extra: ""

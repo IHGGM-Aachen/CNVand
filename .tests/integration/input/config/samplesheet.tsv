@@ -1,0 +1,2 @@
+sample	bam_path	vcf_path
+M24352	.tests/integration/input/M24352_CHR21.bam	.tests/integration/input/M24352_CHR21.vcf.gz
