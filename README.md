@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) 
 
-CNVand is a Snakemake pipeline for CNV analysis. Given a set of BAM and VCF files, it utilizes the tools `cnvkit` and `AnnotSV` to analyze and annotate them.
+CNVand is a snakemake workflow for CNV analysis. Given a set of BAM and VCF files, it utilizes the tools `cnvkit` and `AnnotSV` to analyze and annotate them.
 
 <div align="center">
   <img src="images/rulegraph.svg" alt="Rule Graph">

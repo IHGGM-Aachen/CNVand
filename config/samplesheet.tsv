@@ -1,2 +1,2 @@
 sample	bam_path	vcf_path
-S123456	/path/to/sample.bam	/path/to/sample.vcf
+S123456	/path/to/sample.bam	/path/to/sample.vcf.gz

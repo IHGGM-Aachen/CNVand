@@ -1,0 +1,11 @@
+usage:
+  mandatory-flags:
+    desc: |
+      The CNVand pipeline requires the '--conda' flag to be specified when running the workflow, to ensure consistent versions of CNVkit and AnnotSV are used.
+    flags:
+      - "--use-conda"
+  software-stack-deployment:
+    conda: true # Pipeline works with --use-conda
+    singularity: false # Pipeline works with --use-singularity
+    singularity+conda: false # Pipeline works with --use-singularity --use-conda
+  report: false # Workflow allows the usage of 'snakemake --report report.zip' to generate a report containing all results and explanations
