@@ -4,10 +4,13 @@ from snakemake.utils import min_version
 
 min_version("8.12.0")
 
+
 report: "../report/workflow.rst"
+
 
 ###### Config file and sample sheets #####
 configfile: "config/config.yaml"
+
 
 SAMPLES = pd.read_table(config["samples"]).set_index("sample", drop=False)
 
@@ -20,10 +23,12 @@ validate(SAMPLES, schema="../schemas/samplesheet.schema.yaml")
 
 ##### Helper functions #####
 
+
 def get_bam(wildcards):
     """Retrieve BAM file for a given sample."""
-    return SAMPLES.loc[wildcards.sample, 'bam_path']
+    return SAMPLES.loc[wildcards.sample, "bam_path"]
+
 
 def get_vcf(wildcards):
     """Retrieve VCF file for a given sample."""
-    return SAMPLES.loc[wildcards.sample, 'vcf_path']
+    return SAMPLES.loc[wildcards.sample, "vcf_path"]

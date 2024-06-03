@@ -10,3 +10,4 @@ dependencies:
   - pillow==10.3.0
   - pdf2image==1.17.0 
   - samtools==1.20
+  - snakefmt==0.10.2
