@@ -1,4 +1,4 @@
-Variants where analyzed and annotated following the `CNVand Workflow`_:
+Variants were analyzed and annotated following the CNVand Workflow
 
 1. **CNV Detection with CNVkit:**
    - Target and antitarget coverage calculations were performed using CNVkit. For target regions, additional parameters included `{{ snakemake.config["params"]["cnvkit"]["target_coverage"]["extra"] }}`, and for antitarget regions, `{{ snakemake.config["params"]["cnvkit"]["antitarget_coverage"]["extra"] }}`.
@@ -8,5 +8,5 @@ Variants where analyzed and annotated following the `CNVand Workflow`_:
    - Each CNV event was called to classify copy number states.
 
 2. **CNV Annotation:**
-   - Annotated structural variant data was generated using AnnotSV, which was configured to utilize the reference gene annotations from `{{ snakemake.config["params"]["annotsv"]["refGene"] }}`.
+   - Annotated structural variant data was generated using AnnotSV, which was configured to utilize the reference gene annotations from `{{ snakemake.config["params"]["annotsv"]["annotations"] }}`.
    - The output includes detailed annotations of CNVs with respect to known gene locations and potential functional impacts.
