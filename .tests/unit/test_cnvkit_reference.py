@@ -17,9 +17,17 @@ def test_cnvkit_reference():
         workdir = Path(tmpdir) / "workdir"
         data_path = PurePosixPath(".tests/unit/cnvkit_reference/data")
         expected_path = PurePosixPath(".tests/unit/cnvkit_reference/expected")
+        config_path = PurePosixPath(".tests/integration/input/config")
+        reference_path = PurePosixPath("workflow/resources/")
 
         # Copy data to the temporary workdir.
         shutil.copytree(data_path, workdir)
+        shutil.copytree(config_path, workdir / "config")
+
+        # Ensure the directory structure exists before creating the symlink
+        (workdir / "workflow").mkdir(parents=True, exist_ok=True)
+        os.symlink(Path.cwd() / reference_path, workdir / "workflow/resources")
+
 
         # dbg
         print("output/cnv/reference.cnn", file=sys.stderr)
@@ -40,7 +48,4 @@ def test_cnvkit_reference():
         ])
 
         # Check the output byte by byte using cmp.
-        # To modify this behavior, you can inherit from common.OutputChecker in here
-        # and overwrite the method `compare_files(generated_file, expected_file), 
-        # also see common.py.
         common.OutputChecker(data_path, expected_path, workdir).check()

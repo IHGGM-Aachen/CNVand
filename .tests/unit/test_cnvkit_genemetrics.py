@@ -17,9 +17,11 @@ def test_cnvkit_genemetrics():
         workdir = Path(tmpdir) / "workdir"
         data_path = PurePosixPath(".tests/unit/cnvkit_genemetrics/data")
         expected_path = PurePosixPath(".tests/unit/cnvkit_genemetrics/expected")
+        config_path = PurePosixPath(".tests/integration/input/config")
 
         # Copy data to the temporary workdir.
         shutil.copytree(data_path, workdir)
+        shutil.copytree(config_path, workdir / "config")
 
         # dbg
         print("output/cnv/M24352/M24352_genemetrics.tsv", file=sys.stderr)
@@ -40,7 +42,4 @@ def test_cnvkit_genemetrics():
         ])
 
         # Check the output byte by byte using cmp.
-        # To modify this behavior, you can inherit from common.OutputChecker in here
-        # and overwrite the method `compare_files(generated_file, expected_file), 
-        # also see common.py.
         common.OutputChecker(data_path, expected_path, workdir).check()

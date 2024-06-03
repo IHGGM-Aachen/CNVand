@@ -17,9 +17,11 @@ def test_samtools_index():
         workdir = Path(tmpdir) / "workdir"
         data_path = PurePosixPath(".tests/unit/samtools_index/data")
         expected_path = PurePosixPath(".tests/unit/samtools_index/expected")
+        config_path = PurePosixPath(".tests/integration/input/config")
 
         # Copy data to the temporary workdir.
         shutil.copytree(data_path, workdir)
+        shutil.copytree(config_path, workdir / "config")
 
         # dbg
         print("output/preprocessing/M24352.sorted.bam.bai", file=sys.stderr)
