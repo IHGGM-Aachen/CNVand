@@ -168,7 +168,7 @@ rule cnvkit_scatter_pdf:
         report(
             os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_scatter.pdf"),
             caption=os.path.join(snakedir, "report/workflow.rst"),
-            category="CNV Analysis"
+            category="CNV Analysis",
         ),
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_scatter_pdf", "{sample}.log"),
@@ -176,7 +176,6 @@ rule cnvkit_scatter_pdf:
         "../envs/cnvkit.yaml"
     shell:
         "cnvkit.py scatter {input.cnr} -s {input.call_cns} --y-min -2.5 -v {input.vcf} -o {output} > {log} 2>&1"
-
 
 
 rule cnvkit_scatter_png:
@@ -201,7 +200,7 @@ rule cnvkit_export_vcf:
         report(
             os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_cnv.vcf"),
             caption=os.path.join(snakedir, "report/workflow.rst"),
-            category="CNV Analysis"
+            category="CNV Analysis",
         ),
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_export_vcf", "{sample}.log"),
@@ -225,7 +224,7 @@ rule cnvkit_metrics:
         report(
             os.path.join(config["outdir"], "cnv", "run_metrics.tsv"),
             caption=os.path.join(snakedir, "report/workflow.rst"),
-            category="CNV Analysis"
+            category="CNV Analysis",
         ),
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_metrics.log"),
