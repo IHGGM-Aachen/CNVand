@@ -8,4 +8,4 @@ usage:
     conda: true # Pipeline works with --use-conda
     singularity: false # Pipeline works with --use-singularity
     singularity+conda: false # Pipeline works with --use-singularity --use-conda
-  report: false # Workflow allows the usage of 'snakemake --report report.zip' to generate a report containing all results and explanations
+  report: true # Workflow allows the usage of 'snakemake --report report.zip' to generate a report containing all results and explanations
