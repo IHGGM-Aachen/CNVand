@@ -8,6 +8,9 @@ min_version("8.12.0")
 report: "../report/workflow.rst"
 
 
+snakedir = workflow.basedir
+
+
 ###### Config file and sample sheets #####
 configfile: "config/config.yaml"
 

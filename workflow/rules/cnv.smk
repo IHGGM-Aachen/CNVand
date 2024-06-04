@@ -165,13 +165,18 @@ rule cnvkit_scatter_pdf:
         call_cns=os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_call.cns"),
         vcf=get_vcf,
     output:
-        os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_scatter.pdf"),
+        report(
+            os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_scatter.pdf"),
+            caption=os.path.join(snakedir, "report/workflow.rst"),
+            category="CNV Analysis"
+        ),
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_scatter_pdf", "{sample}.log"),
     conda:
         "../envs/cnvkit.yaml"
     shell:
         "cnvkit.py scatter {input.cnr} -s {input.call_cns} --y-min -2.5 -v {input.vcf} -o {output} > {log} 2>&1"
+
 
 
 rule cnvkit_scatter_png:
@@ -193,7 +198,11 @@ rule cnvkit_export_vcf:
     input:
         call_cns=os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_call.cns"),
     output:
-        os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_cnv.vcf"),
+        report(
+            os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_cnv.vcf"),
+            caption=os.path.join(snakedir, "report/workflow.rst"),
+            category="CNV Analysis"
+        ),
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_export_vcf", "{sample}.log"),
     conda:
@@ -213,7 +222,11 @@ rule cnvkit_metrics:
             sample=SAMPLES.index,
         ),
     output:
-        os.path.join(config["outdir"], "cnv", "run_metrics.tsv"),
+        report(
+            os.path.join(config["outdir"], "cnv", "run_metrics.tsv"),
+            caption=os.path.join(snakedir, "report/workflow.rst"),
+            category="CNV Analysis"
+        ),
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_metrics.log"),
     conda:
