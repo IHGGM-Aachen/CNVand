@@ -1,7 +1,5 @@
 # CNVand Configuration Instructions
 
-This document provides a guide to setting up the configuration file and samplesheet for the CNVand pipeline. Follow these instructions to ensure that your CNVand workflow is correctly configured and ready for use.
-
 ## Configuration File
 
 The configuration file (`config/config.yaml`) contains various settings that the CNVand pipeline requires. Below is an example of a typical configuration file along with an explanation of each parameter.

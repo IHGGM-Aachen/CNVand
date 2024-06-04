@@ -5,6 +5,7 @@ channels:
   - defaults
 dependencies:
   - snakemake>=8.0.0
+  - pandas=2.2.2
   - python>=3.12
   - pytest==8.2.1
   - pillow==10.3.0
