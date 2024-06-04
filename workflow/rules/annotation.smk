@@ -4,7 +4,7 @@ rule annotsv:
     output:
         report(
             os.path.join(config["outdir"], "annotsv", "{sample}.annotated.tsv"),
-            caption=os.path.join(snakedir, "report/workflow.rst"),
+            caption="../report/workflow.rst",
             category="CNV Annotation",
         ),
     log:
