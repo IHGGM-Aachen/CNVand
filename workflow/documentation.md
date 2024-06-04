@@ -6,9 +6,9 @@ This Snakemake workflow performs copy number variation (CNV) analysis using CNVk
 
 ## Rule Graph
 
-![Rule Graph](../images/rulegraph.svg)
-
-## Workflow Steps
+<div align="center">
+  <img src="images/rulegraph.svg" alt="Rule Graph">
+</div>
 
 ### Preprocessing
 
