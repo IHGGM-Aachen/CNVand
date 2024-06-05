@@ -10,3 +10,11 @@ Initial release of the CNVand pipeline.
 - Docker support for pipeline execution in an isolated environment.
 - Snakedeploy support for quick installation.
 - Automated HTML report generation with Snakemake.
+
+## [0.2] - 05/06/2024
+Minor changes in documentation and GitHub actions
+
+### Changed
+- GitHub workflow description under `.github/workflows/dockerize.yml` to exclude annotation bundling.
+- Mamba `environment.yml` file to set up an environment with the name 'cnvand'.
+- Main `README.md` to adapt to the former changes and to link to other documentation inside the repository.
