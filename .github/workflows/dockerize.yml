@@ -34,12 +34,6 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-    - name: Download and Extract Annotations
-      run: |
-        mkdir -p data/annotations
-        curl -L https://www.lbgi.fr/~geoffroy/Annotations/Annotations_Human_3.4.2.tar.gz -o data/annotations/Annotations_Human_3.4.2.tar.gz
-        tar -xzvf data/annotations/Annotations_Human_3.4.2.tar.gz -C data/annotations/
-
     - name: Build Docker image
       id: build
       run: |
