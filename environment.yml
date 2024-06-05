@@ -1,4 +1,4 @@
-name: cnvand-test
+name: cnvand
 channels:
   - conda-forge
   - bioconda
