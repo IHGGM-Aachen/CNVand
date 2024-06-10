@@ -14,7 +14,7 @@ jobs:
 
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: IHGGM-Aachen/cnvand  # Ensure this is in lowercase
+      IMAGE_NAME: ihggm-aachen/cnvand  # Ensure this is in lowercase
 
     steps:
     - name: Checkout repository
