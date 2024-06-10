@@ -4,12 +4,6 @@
 
 This Snakemake workflow performs copy number variation (CNV) analysis using CNVkit and AnnotSV. The workflow includes steps for preprocessing BAM files, calculating coverage, generating reference models, and annotating variants. The following sections describe each step in detail.
 
-## Rule Graph
-
-<div align="center">
-  <img src="images/rulegraph.svg" alt="Rule Graph">
-</div>
-
 ### Preprocessing
 
 #### `samtools_sort`

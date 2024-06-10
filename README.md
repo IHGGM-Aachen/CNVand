@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) 
 
-CNVand is a snakemake workflow for CNV analysis, tailored for preparing data used by the [CNVizard](https://github.com/jerkrause/CNVizard) CNV visualization tool. Given a set of BAM and VCF files, it utilizes the tools `CNVkit` and `AnnotSV` to analyze and annotate copy number variations.
+CNVand is a snakemake workflow for CNV analysis, tailored for preparing data used by the [CNVizard](https://github.com/IHGGM-Aachen/CNVizard) CNV visualization tool. Given a set of BAM and VCF files, it utilizes the tools `CNVkit` and `AnnotSV` to analyze and annotate copy number variations.
 
 <div align="center">
   <img src="images/rulegraph.svg" alt="Rule Graph">
