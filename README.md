@@ -33,7 +33,7 @@ For AnnotSV to work, the annotation files must be downloaded separately and be r
 CNVand can be executed using mamba environments or a pre-built docker container.
 
 ### Mamba (Snakedeploy)
-For a one-click installation, snakedeploy can be used. For further information, see the entry for CNVand in the [Snakemake Workflow Catalog](https://snakemake.github.io/snakemake-workflow-catalog/?repo=CarlosClassen/CNVand)
+For a one-click installation, snakedeploy can be used. For further information, see the entry for CNVand in the [Snakemake Workflow Catalog](https://snakemake.github.io/snakemake-workflow-catalog/?repo=IHGGM-Aachen/CNVand)
 
 ### Mamba (Manual)
 This workflow can easily setup manually with the given environment file. Install Snakemake and dependencies using the command:
@@ -66,13 +66,13 @@ snakemake --report report.zip
 CNVand can also be used inside a Docker container. To do so, first pull the Docker image with:
 
 ```bash
-docker pull ghcr.io/carlosclassen/cnvand:latest
+docker pull ghcr.io/ihggm-aachen/cnvand:latest
 ```
 
 Then run the container with the bind mounts needed in your setup:
 
 ```bash
-docker run --rm -it -v /path/to/your/data:/data ghcr.io/carlosclassen/cnvand:latest /bin/bash
+docker run --rm -it -v /path/to/your/data:/data ghcr.io/ihggm-aachen/cnvand:latest /bin/bash
 ```
 
 This command opens an interactive shell inside the Docker container. Once inside the container, you should be placed inside the `/cnvand` the directory. From there then run the pipeline with the appropriate configuration:
