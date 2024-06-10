@@ -72,10 +72,10 @@ docker pull ghcr.io/ihggm-aachen/cnvand:latest
 Then run the container with the bind mounts needed in your setup:
 
 ```bash
-docker run --rm -it -v /path/to/your/data:/data ghcr.io/ihggm-aachen/cnvand:latest /bin/bash
+docker run -it -v /path/to/your/data:/data ghcr.io/ihggm-aachen/cnvand:latest /bin/bash
 ```
 
-This command opens an interactive shell inside the Docker container. Once inside the container, you should be placed inside the `/cnvand` the directory. From there then run the pipeline with the appropriate configuration:
+This command opens an interactive shell inside the Docker container. Once inside the container, you are placed inside the `/cnvand` the directory. From there then run the pipeline once you set an appropriate configuration:
 
 ```bash
 snakemake --cores all --use-conda
