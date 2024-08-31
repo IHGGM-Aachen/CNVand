@@ -35,6 +35,7 @@ params:
       extra: "" 
     segment:
       extra: ""
+      model: "cbs"
   annotsv:
     annotations: "data/annotations" # Annotations to be downloaded externally - see README.md for more details
     extra: ""

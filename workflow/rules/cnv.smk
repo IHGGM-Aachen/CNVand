@@ -62,7 +62,7 @@ rule cnvkit_reference:
     conda:
         "../envs/cnvkit.yaml"
     shell:
-        "cnvkit.py reference {input.target} {input.antitarget} --fasta {input.ref} -o {output} > {log} 2>&1"
+        "cnvkit.py reference {input.target} {input.antitarget} --fasta {input.ref} -o {output} {params.extra} > {log} 2>&1"
 
 
 rule cnvkit_fix:
@@ -91,14 +91,15 @@ rule cnvkit_segment:
     output:
         temp(os.path.join(config["outdir"], "cnv", "{sample}", "{sample}.cns")),
     params:
+        model=config["params"]["cnvkit"]["segment"]["model"]
         extra=config["params"]["cnvkit"]["segment"]["extra"],
-    threads: 1  # Limited by HMM method
+    threads: 4
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_segment", "{sample}.log"),
     conda:
         "../envs/cnvkit.yaml"
     shell:
-        "cnvkit.py segment -m hmm {input.cnr} -o {output} --vcf {input.vcf} -p {threads} > {log} 2>&1"
+        "cnvkit.py segment -m {params.model} {input.cnr} -o {output} --vcf {input.vcf} -p {threads} {params.extra} > {log} 2>&1"
 
 
 rule cnvkit_call:
@@ -123,12 +124,14 @@ rule cnvkit_bintest:
         call_cns=os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_call.cns"),
     output:
         os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_bintest.tsv"),
+    params:
+        ploidy=config["params"]["cnvkit"]["bintest"]["extra"],
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_bintest", "{sample}.log"),
     conda:
         "../envs/cnvkit.yaml"
     shell:
-        "cnvkit.py bintest {input.cnr} -s {input.call_cns} --target -o {output} > {log} 2>&1"
+        "cnvkit.py bintest {input.cnr} -s {input.call_cns} --target -o {output} {params.extra} > {log} 2>&1"
 
 
 rule cnvkit_breaks:
@@ -137,12 +140,14 @@ rule cnvkit_breaks:
         cns=os.path.join(config["outdir"], "cnv", "{sample}", "{sample}.cns"),
     output:
         os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_breaks.tsv"),
+    params:
+        ploidy=config["params"]["cnvkit"]["breaks"]["extra"],
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_breaks", "{sample}.log"),
     conda:
         "../envs/cnvkit.yaml"
     shell:
-        "cnvkit.py breaks {input.cnr} {input.cns} > {output} 2>&1"
+        "cnvkit.py breaks {input.cnr} {input.cns} > {output} {params.extra} 2>&1"
 
 
 rule cnvkit_genemetrics:
@@ -151,12 +156,14 @@ rule cnvkit_genemetrics:
         cns=os.path.join(config["outdir"], "cnv", "{sample}", "{sample}.cns"),
     output:
         os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_genemetrics.tsv"),
+    params:
+        ploidy=config["params"]["cnvkit"]["genemetrics"]["extra"],
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_genemetrics", "{sample}.log"),
     conda:
         "../envs/cnvkit.yaml"
     shell:
-        "cnvkit.py genemetrics {input.cnr} -s {input.cns} > {output} 2>&1"
+        "cnvkit.py genemetrics {input.cnr} -s {input.cns} > {output} {params.extra} 2>&1"
 
 
 rule cnvkit_scatter_pdf:
@@ -202,12 +209,14 @@ rule cnvkit_export_vcf:
             caption="../report/workflow.rst",
             category="CNV Analysis",
         ),
+    params:
+        ploidy=config["params"]["cnvkit"]["export_vcf"]["extra"],
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_export_vcf", "{sample}.log"),
     conda:
         "../envs/cnvkit.yaml"
     shell:
-        "cnvkit.py export vcf {input.call_cns} -i {wildcards.sample} -o {output} > {log} 2>&1"
+        "cnvkit.py export vcf {input.call_cns} -i {wildcards.sample} -o {output} {params.extra} > {log} 2>&1"
 
 
 rule cnvkit_metrics:
