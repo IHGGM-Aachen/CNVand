@@ -91,9 +91,9 @@ rule cnvkit_segment:
     output:
         temp(os.path.join(config["outdir"], "cnv", "{sample}", "{sample}.cns")),
     params:
-        model=config["params"]["cnvkit"]["segment"]["model"]
+        model=config["params"]["cnvkit"]["segment"]["model"],
         extra=config["params"]["cnvkit"]["segment"]["extra"],
-    threads: 4
+    threads: 1
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_segment", "{sample}.log"),
     conda:
@@ -125,7 +125,7 @@ rule cnvkit_bintest:
     output:
         os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_bintest.tsv"),
     params:
-        ploidy=config["params"]["cnvkit"]["bintest"]["extra"],
+        extra=config["params"]["cnvkit"]["bintest"]["extra"],
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_bintest", "{sample}.log"),
     conda:
@@ -141,7 +141,7 @@ rule cnvkit_breaks:
     output:
         os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_breaks.tsv"),
     params:
-        ploidy=config["params"]["cnvkit"]["breaks"]["extra"],
+        extra=config["params"]["cnvkit"]["breaks"]["extra"],
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_breaks", "{sample}.log"),
     conda:
@@ -157,7 +157,7 @@ rule cnvkit_genemetrics:
     output:
         os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_genemetrics.tsv"),
     params:
-        ploidy=config["params"]["cnvkit"]["genemetrics"]["extra"],
+        extra=config["params"]["cnvkit"]["genemetrics"]["extra"],
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_genemetrics", "{sample}.log"),
     conda:
@@ -210,7 +210,7 @@ rule cnvkit_export_vcf:
             category="CNV Analysis",
         ),
     params:
-        ploidy=config["params"]["cnvkit"]["export_vcf"]["extra"],
+        extra=config["params"]["cnvkit"]["export_vcf"]["extra"],
     log:
         os.path.join(config["outdir"], "logs", "cnvkit_export_vcf", "{sample}.log"),
     conda:

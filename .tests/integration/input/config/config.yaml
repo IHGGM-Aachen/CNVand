@@ -34,6 +34,7 @@ params:
     export_vcf:
       extra: "" 
     segment:
+      model: "hmm"
       extra: ""
   annotsv:
     annotations: "workflow/data/annotations/" # Annotations to be downloaded externally - see README.md for more details
