@@ -44,6 +44,7 @@ params:
       extra: "" 
     segment:
       extra: ""
+  merge_vcf_cnr: False
   annotsv:
     annotations: "workflow/data/annotations/" # Annotations to be downloaded externally - see README.md for more details
     extra: ""
