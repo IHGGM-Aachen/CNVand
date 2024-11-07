@@ -36,6 +36,7 @@ params:
     segment:
       model: "hmm"
       extra: ""
+  merge_vcf_cnr: False # Flag to set experimental CNVizard VCF/CNR merge
   annotsv:
     annotations: "workflow/data/annotations/" # Annotations to be downloaded externally - see README.md for more details
     extra: ""
