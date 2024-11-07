@@ -1,6 +1,6 @@
 rule annotsv:
     input:
-        os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_cnv.vcf"),
+        get_input_for_annotsv,
     output:
         report(
             os.path.join(config["outdir"], "annotsv", "{sample}.annotated.tsv"),
@@ -11,7 +11,7 @@ rule annotsv:
         os.path.join(config["outdir"], "logs", "annotsv", "{sample}.log"),
     params:
         annotations=config["params"]["annotsv"]["annotations"],  # Path to the pre-downloaded annotations
-        extra=config["params"]["annotsv"]["extra"],
+        extra=config["params"]["annotsv"]["extra"] + (" -SVminSize 0" if config["params"]["merge_vcf_cnr"] else ""),
     conda:
         "../envs/annotsv.yaml"
     shell:

@@ -44,6 +44,7 @@ params:
       extra: "" 
     segment:
       extra: ""
+  merge_vcf_cnr: False
   annotsv:
     annotations: "workflow/data/annotations/" # Annotations to be downloaded externally - see README.md for more details
     extra: ""
@@ -80,6 +81,7 @@ params:
       - **extra**: Additional parameters for scatter plots.
     - **export_vcf**: Additional parameters for VCF export.
     - **segment**: Additional parameters for segmentation.
+  - **merge_vcf_cnr**: Flag to activate experimental merge of VCF and CNR data before annotation.
   - **annotsv**: Parameters for AnnotSV tool.
     - **annotations**: Path to the directory containing annotation files. Example: `workflow/data/annotations/`.
     - **extra**: Additional parameters for AnnotSV.

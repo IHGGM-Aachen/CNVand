@@ -35,3 +35,9 @@ def get_bam(wildcards):
 def get_vcf(wildcards):
     """Retrieve VCF file for a given sample."""
     return SAMPLES.loc[wildcards.sample, "vcf_path"]
+
+def get_input_for_annotsv(wildcards):
+    if config["params"]["merge_vcf_cnr"]:
+        return os.path.join(config["outdir"], "cnv", wildcards.sample, f"{wildcards.sample}_merged.vcf")
+    else:
+        return os.path.join(config["outdir"], "cnv", wildcards.sample, f"{wildcards.sample}_cnv.vcf")

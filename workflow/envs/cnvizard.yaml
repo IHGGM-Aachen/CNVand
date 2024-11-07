@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12.4
+  - pip
+  - pip:
+      - CNVizard==0.3.1
