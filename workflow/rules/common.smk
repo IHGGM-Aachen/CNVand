@@ -37,7 +37,7 @@ def get_vcf(wildcards):
     return SAMPLES.loc[wildcards.sample, "vcf_path"]
 
 def get_input_for_annotsv(wildcards):
-    if config.get("merge_vcf_cnr", True):
+    if config["params"]["merge_vcf_cnr"]:
         return os.path.join(config["outdir"], "cnv", wildcards.sample, f"{wildcards.sample}_merged.vcf")
     else:
         return os.path.join(config["outdir"], "cnv", wildcards.sample, f"{wildcards.sample}_cnv.vcf")
