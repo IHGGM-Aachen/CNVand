@@ -218,6 +218,18 @@ rule cnvkit_export_vcf:
     shell:
         "cnvkit.py export vcf {input.call_cns} -i {wildcards.sample} -o {output} {params.extra} > {log} 2>&1"
 
+rule cnvkit_merge_vcf_cnr:
+    input:
+        bintest_tsv=os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_bintest.tsv"),
+        vcf=get_vcf,
+    output:
+        merged_vcf=os.path.join(config["outdir"], "cnv", "{sample}", "{sample}_merged.vcf"),
+    log:
+        os.path.join(config["outdir"], "logs", "cnvkit_merge_vcf_cnr", "{sample}.log"),
+    conda:
+        "../envs/cnvizard.yaml"
+    script:
+        "../scripts/merge_vcf_cnr.py"
 
 rule cnvkit_metrics:
     input:
