@@ -26,3 +26,10 @@ Minor changes and fixes in CNVkit parameter handling
 - Fix missing passthrough of *extra* parameters in `workflow/rules/cnv.smk` and add a model option for the rule cnvkit_segment
 - Add the parameter from above as a seperate entry in `config/config.yaml`
 - Default model for the segment rule is now `cbs`
+
+## [0.4] - 07/11/2024
+Added experimental feature to merge VCF and CNR files before annotation
+
+- Added rule in `workflow/rules/cnv.smk` to perform the merge of VCF and CNR files
+- Added getter method for annotSV rule to handle execution paths
+- Added config file option flag to activate the feature
